@@ -33,6 +33,7 @@ public class Game {
     public void restartGame() {
         System.out.println("game has started");
         buildGame(false);
+        clearPlayerPlays();
         startGameLoop();
         restart();
     }
@@ -277,11 +278,14 @@ public class Game {
         }
     }
 
-    public void clearPlayerPick(Player pl){
-        for (Player p: playerList){
+    public void clearPlayerPlays(){
+
+            Player pl = getPlayer(0);
+            Player pl2 = getPlayer(1);
             pl.getPlays().clear();
-        }
+            pl2.getPlays().clear();
     }
+
 
 
 }
