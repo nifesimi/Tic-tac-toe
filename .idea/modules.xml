@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictac.iml" filepath="$PROJECT_DIR$/.idea/modules/tictac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictac_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tictac_main.iml" group="tictac" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tictac_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tictac_test.iml" group="tictac" />
+    </modules>
+  </component>
+</project>
