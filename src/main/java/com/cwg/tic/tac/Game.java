@@ -1,7 +1,5 @@
 package com.cwg.tic.tac;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,27 +28,34 @@ public class Game {
         System.out.println("game has started");
         buildGame(true);
         startGameLoop();
-        getScores();
-        restart();
+        calculateScores();
+        displayScores();
+
+        if(playAgain()){
+
+            restartGame();
+        }
+
     }
+
 
     public void restartGame() {
         System.out.println("game has started");
         buildGame(false);
         clearPlayerPlays();
         startGameLoop();
-        getScores();
-        restart();
+        calculateScores();
+        playAgain();
     }
 
 
-    public void restart() {
+    public boolean playAgain() {
+        clrScreen();
         System.out.println("Do you want to play again? Y/N");
-        String in = scanner.nextLine();
+        String response = scanner.nextLine();
 
-        if (in.equals("y")){
-            restartGame();
-        }
+        return ("y".equalsIgnoreCase(response));
+
 
     }
 
@@ -291,11 +296,11 @@ public class Game {
             pl2.getPlays().clear();
     }
 
-    public void getScores(){
+    public void calculateScores(){
 
 
-            int playOneCount = 0;
-            int playTwoCount = 0;
+        int playOneCount = 0;
+        int playTwoCount = 0;
 
         Player pl = getPlayer(0);
         Player pl2 = getPlayer(1);
@@ -309,6 +314,31 @@ public class Game {
         }
         PlayerOneCount += playOneCount;
         PlayerTwoCount += playTwoCount;
+
+
+
+    }
+
+
+    private void displayScores(){
+
+        try{
+
+            Thread.sleep(2000);
+
+
+
+
+        }catch (Exception e){
+
+        }
+        clrScreen();
+
+        String playerNames = "  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ";
+        String title = "SCORE BOARD";
+
+       // title.length()
+
         System.out.println("     SCORE BOARD     ");
         System.out.println("-----------------------");
         System.out.println("  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ");
