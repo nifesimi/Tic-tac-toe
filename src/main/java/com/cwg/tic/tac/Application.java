@@ -18,6 +18,7 @@ public class Application {
         //start new game
         Game game = new Game();
          game.start();
+         //game.getScores();
          //game.restart();
         /*System.out.println("Do you want to play again? Y/N");
         String in = input.nextLine();

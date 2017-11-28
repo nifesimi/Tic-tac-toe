@@ -21,12 +21,16 @@ public class Game {
     private Scanner scanner;
     private boolean isPlayer1Turn;
     private List<String> winningCombinations;
+    private int PlayerOneCount;
+    private int PlayerTwoCount;
+
 
 
     public void start() {
         System.out.println("game has started");
         buildGame(true);
         startGameLoop();
+        getScores();
         restart();
     }
 
@@ -35,6 +39,7 @@ public class Game {
         buildGame(false);
         clearPlayerPlays();
         startGameLoop();
+        getScores();
         restart();
     }
 
@@ -109,8 +114,6 @@ public class Game {
     }
 
     public void startGameLoop() {
-
-
         isPlayer1Turn = true;
         int playCount = 0;
         boolean gameHasEnded = false;
@@ -131,8 +134,10 @@ public class Game {
                 board.showBoard();
                 System.out.println(player.getName() + " has won !!!");
                 gameHasEnded = true;
+
             }
             playCount++;
+
 
             //check if all tiles have been selected
 
@@ -284,6 +289,35 @@ public class Game {
             Player pl2 = getPlayer(1);
             pl.getPlays().clear();
             pl2.getPlays().clear();
+    }
+
+    public void getScores(){
+
+
+            int playOneCount = 0;
+            int playTwoCount = 0;
+
+        Player pl = getPlayer(0);
+        Player pl2 = getPlayer(1);
+
+        if (hasPlayerWon(pl)){
+            playOneCount++;
+
+        }
+        else if (hasPlayerWon(pl2)){
+            playTwoCount++;
+        }
+        PlayerOneCount += playOneCount;
+        PlayerTwoCount += playTwoCount;
+        System.out.println("     SCORE BOARD     ");
+        System.out.println("-----------------------");
+        System.out.println("  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ");
+        System.out.println("-------------------------");
+        System.out.println("  "+PlayerOneCount+"        |         "+PlayerTwoCount);
+
+
+
+
     }
 
 
