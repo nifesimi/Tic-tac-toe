@@ -15,6 +15,7 @@ public class Application {
 
         //start new game
         new Game().start();
+        //change
 
     }
 }
