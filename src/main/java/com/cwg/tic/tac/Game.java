@@ -45,7 +45,11 @@ public class Game {
         clearPlayerPlays();
         startGameLoop();
         calculateScores();
-        playAgain();
+        displayScores();
+        if(playAgain()){
+
+            restartGame();
+        }
     }
 
 
