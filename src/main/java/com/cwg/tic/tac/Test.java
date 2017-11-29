@@ -31,7 +31,8 @@ public class Test {
         int PLAYER_MAX_NAME_LENGTH = 0;
 
         for(String name : playerNames){
-            if(name.length() > PLAYER_MAX_NAME_LENGTH)PLAYER_MAX_NAME_LENGTH = name.length();
+            if(name.length() > PLAYER_MAX_NAME_LENGTH)
+                PLAYER_MAX_NAME_LENGTH = name.length();
 
         }
 
