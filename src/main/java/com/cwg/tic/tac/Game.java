@@ -23,19 +23,16 @@ public class Game {
     private int PlayerTwoCount;
 
 
-
     public void start() {
         System.out.println("game has started");
         buildGame(true);
         startGameLoop();
         calculateScores();
         displayScores();
-
-        if(playAgain()){
+        if (playAgain()) {
 
             restartGame();
         }
-
     }
 
 
@@ -46,7 +43,7 @@ public class Game {
         startGameLoop();
         calculateScores();
         displayScores();
-        if(playAgain()){
+        if (playAgain()) {
 
             restartGame();
         }
@@ -68,7 +65,7 @@ public class Game {
 
         scanner = new Scanner(System.in);
 
-        if (isTrue){
+        if (isTrue) {
             playerList = new ArrayList<>();
         }
 
@@ -85,10 +82,9 @@ public class Game {
         //pause the screen and clear
         pauseScreen();
         clrScreen();
-        if(isTrue){
+        if (isTrue) {
             initializePlayers();
-        }
-        else {
+        } else {
             getPlayerList();
         }
         clrScreen();
@@ -151,7 +147,7 @@ public class Game {
 
             //check if all tiles have been selected
 
-            if (playCount == 9) {
+            if (playCount == 9 && !gameHasEnded) {
                 System.out.println("Game ends in a draw");
                 gameHasEnded = true;
             }
@@ -214,6 +210,46 @@ public class Game {
 
         for (String winningCombo : winningCombinations) {
 
+            //get each text in the winning combination
+            char[] winIndexes = winningCombo.toCharArray();
+
+            int winCount = 0;
+
+            //loop tru the player plays indexes to check for each text in the winning......
+            for (String indexPlayed : player.getPlays()) {
+
+                if(String.valueOf(winIndexes[0]).equalsIgnoreCase(indexPlayed)){
+                    winCount++;
+                }
+                if(String.valueOf(winIndexes[1]).equalsIgnoreCase(indexPlayed)){
+                    winCount++;
+                }
+                if(String.valueOf(winIndexes[2]).equalsIgnoreCase(indexPlayed)){
+                    winCount++;
+                }
+            }
+
+            if(winCount == 3){
+                playerWon =true;
+                break;
+            }
+
+        }
+
+        return playerWon;
+
+    }
+
+    /*private boolean hasPlayerWon(Player player) {
+
+        if (player.getPlays().size() < 3) {
+            return false;
+        }
+        boolean playerWon = false;
+
+
+        for (String winningCombo : winningCombinations) {
+
             boolean playerWonCombo = true;
 
             for (String indexPlayed : player.getPlays()) {
@@ -235,16 +271,13 @@ public class Game {
 
         return playerWon;
 
-    }
-
-
+    }*/
 
 
     private void buildBoard() {
         board = new Board();
 
     }
-
 
 
     private String getInput(String prompt, boolean shouldClearScreen) {
@@ -254,8 +287,8 @@ public class Game {
 
         }
         System.out.print(prompt + " : ");
-        String input = scanner.nextLine();
-        return input;
+
+        return scanner.nextLine();
 
     }
 
@@ -293,15 +326,15 @@ public class Game {
         }
     }
 
-    public void clearPlayerPlays(){
+    public void clearPlayerPlays() {
 
-            Player pl = getPlayer(0);
-            Player pl2 = getPlayer(1);
-            pl.getPlays().clear();
-            pl2.getPlays().clear();
+        Player pl = getPlayer(0);
+        Player pl2 = getPlayer(1);
+        pl.getPlays().clear();
+        pl2.getPlays().clear();
     }
 
-    public void calculateScores(){
+    public void calculateScores() {
 
 
         int playOneCount = 0;
@@ -310,38 +343,34 @@ public class Game {
         Player pl = getPlayer(0);
         Player pl2 = getPlayer(1);
 
-        if (hasPlayerWon(pl)){
+        if (hasPlayerWon(pl)) {
             playOneCount++;
 
-        }
-        else if (hasPlayerWon(pl2)){
+        } else if (hasPlayerWon(pl2)) {
             playTwoCount++;
         }
         PlayerOneCount += playOneCount;
         PlayerTwoCount += playTwoCount;
 
 
-
     }
 
 
-    private void displayScores(){
+    private void displayScores() {
 
-        try{
+        try {
 
-            Thread.sleep(2000);
-
-
+            Thread.sleep(1000);
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-        String[] playerNames = {playerList.get(0).getName(), playerList.get(1).getName() };
-        String [] playerScores = {Integer.toString(PlayerOneCount), Integer.toString(PlayerTwoCount)};
+        String[] playerNames = {playerList.get(0).getName(), playerList.get(1).getName()};
+        String[] playerScores = {Integer.toString(PlayerOneCount), Integer.toString(PlayerTwoCount)};
 
         int MIN_CELL_PADDING = 2;
-        int MIN_CELL_WIDTH =  16;
+        int MIN_CELL_WIDTH = 16;
         int NUMBER_OF_PLAYERS = playerNames.length;
         int NUMBER_OF_HORIZONTAL_DIVIDERS = NUMBER_OF_PLAYERS + 1;
 
@@ -349,8 +378,8 @@ public class Game {
 
         int PLAYER_MAX_NAME_LENGTH = 0;
 
-        for(String name : playerNames){
-            if(name.length() > PLAYER_MAX_NAME_LENGTH)
+        for (String name : playerNames) {
+            if (name.length() > PLAYER_MAX_NAME_LENGTH)
                 PLAYER_MAX_NAME_LENGTH = name.length();
 
         }
@@ -358,7 +387,7 @@ public class Game {
         int calculatedCellWidth = MIN_CELL_WIDTH;
 
 
-        if((PLAYER_MAX_NAME_LENGTH + (MIN_CELL_PADDING * 2)) > MIN_CELL_WIDTH){
+        if ((PLAYER_MAX_NAME_LENGTH + (MIN_CELL_PADDING * 2)) > MIN_CELL_WIDTH) {
             calculatedCellWidth = PLAYER_MAX_NAME_LENGTH + (MIN_CELL_PADDING * 2);
         }
 
@@ -370,16 +399,14 @@ public class Game {
         //row 1 header
         repeatCharacter(dividerLength, '-', true);
         System.out.print('|');
-        centerText(HEADER,(dividerLength - 2) );
+        centerText(HEADER, (dividerLength - 2));
         System.out.print("|\n");
         repeatCharacter(dividerLength, '-', true);
 
 
-
-
         //row 2 player names
 
-        for(int i = 0 ; i < NUMBER_OF_PLAYERS; i++){
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             System.out.print('|');
 
             centerText(playerNames[i], calculatedCellWidth);
@@ -389,7 +416,7 @@ public class Game {
         repeatCharacter(dividerLength, '-', true);
 
 
-        for(int i = 0 ; i < NUMBER_OF_PLAYERS; i++){
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             System.out.print('|');
 
             centerText(playerScores[i], calculatedCellWidth);
@@ -403,7 +430,7 @@ public class Game {
     }
 
 
-    public static void centerText(String text, int fullTextLength){
+    public static void centerText(String text, int fullTextLength) {
 
         int leftJustify = (fullTextLength - text.length()) / 2;
         repeatCharacter(leftJustify, ' ', false);
@@ -412,12 +439,12 @@ public class Game {
 
     }
 
-    public static int repeatCharacter(int length, char c, boolean addNewLine){
+    public static int repeatCharacter(int length, char c, boolean addNewLine) {
 
-        for(int i = 0 ; i < length ; i++){
+        for (int i = 0; i < length; i++) {
             System.out.print(c);
         }
-        if(addNewLine){
+        if (addNewLine) {
             System.out.println("");
 
         }
@@ -425,23 +452,19 @@ public class Game {
         return 0;
     }
 
-        //clrScreen();
+    //clrScreen();
 
-       /** String playerNames = "  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ";
-        String title = "SCORE BOARD";
+    /** String playerNames = "  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ";
+     String title = "SCORE BOARD";
 
-       // title.length()
-        System.out.println("");
-        System.out.println("");
-        System.out.println("     SCORE BOARD     ");
-        System.out.println("-----------------------");
-        System.out.println("  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ");
-        System.out.println("-------------------------");
-        System.out.println("  "+PlayerOneCount+"        |         "+PlayerTwoCount);**/
-
-
-
-
+     // title.length()
+     System.out.println("");
+     System.out.println("");
+     System.out.println("     SCORE BOARD     ");
+     System.out.println("-----------------------");
+     System.out.println("  "+ playerList.get(0).getName()+ "           " + playerList.get(1).getName() + "    ");
+     System.out.println("-------------------------");
+     System.out.println("  "+PlayerOneCount+"        |         "+PlayerTwoCount);**/
 
 
 }
