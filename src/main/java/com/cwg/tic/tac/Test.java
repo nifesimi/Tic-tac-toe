@@ -1,8 +1,8 @@
 package com.cwg.tic.tac;
 
 /**
- * @author : Chukwudum Ekwueme
- * @email *: chidumekekwueme@gmail.com, chukwudum.ekwueme@cwlgroup.com
+ * @author : Fatunke Nifesimi
+ * @email *: nife.fatunke@gmail.com 
  * @date **: 11/28/17 3:24 PM
  * -------------------------------------------------------------
  */

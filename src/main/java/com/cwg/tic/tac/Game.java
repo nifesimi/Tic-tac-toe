@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * @author : Chukwudum Ekwueme
- * @email *: chidumekekwueme@gmail.com, chukwudum.ekwueme@cwlgroup.com
+ * @author : Fatunke Nifesimi
+ * @email *: nife.fatunke@gmail.com 
  * @date **: 11/10/17 12:36 PM
  * -------------------------------------------------------------
  */
